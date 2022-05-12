@@ -75,6 +75,9 @@ constructor(value){
         return ;
       }
       if (NextNode.next.value===value) {
+        if (NextNode.next===this.tail) {
+        this.tail=NextNode;
+        }
         NextNode.next=NextNode.next.next;
         
         this.length=this.length-1;
@@ -108,5 +111,9 @@ mylinkedList.append(16);
 mylinkedList.append(13);
 mylinkedList.insert(1,11);
 mylinkedList.insert(4,17);
-mylinkedList.delete(17);
+mylinkedList.append(19);
+mylinkedList.delete(19);
+mylinkedList.delete(13);
+mylinkedList.delete(11);
 console.log(mylinkedList.traverse(),mylinkedList.length);
+console.log(mylinkedList);
