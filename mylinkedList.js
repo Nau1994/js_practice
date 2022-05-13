@@ -24,13 +24,9 @@ constructor(value){
   prepend(value){
     //create node
     let node=new Node(value);
-    
-    
-    
-        node.next=this.head;
-        this.head=node;
-        
-        this.length=this.length+1;
+     node.next=this.head;
+     this.head=node;
+     this.length=this.length+1;
        
     return this;
     
@@ -107,6 +103,22 @@ constructor(value){
       currentNode=currentNode.next;
     }
   }
+
+    reverse(){
+      let prevNode = null;
+      let currentNode = this.head;
+      let nextNode = currentNode;
+    this.tail=currentNode;
+    while(nextNode !== null){
+      nextNode=currentNode.next;
+      currentNode.next=prevNode;
+      prevNode=currentNode;
+      currentNode=nextNode;
+      //nextNode=currentNode.next;
+    }
+      this.head=prevNode;
+      return this;
+  }
   
 }
 
@@ -120,5 +132,21 @@ mylinkedList.delete(19);
 mylinkedList.delete(13);
 mylinkedList.delete(11);
 mylinkedList.prepend(23);
+console.log(mylinkedList);
+console.log(mylinkedList.traverse(),mylinkedList.length);
+mylinkedList.reverse();
+console.log(mylinkedList.traverse(),mylinkedList.length);
+console.log(mylinkedList);
+mylinkedList.append(16);
+mylinkedList.append(13);
+mylinkedList.insert(1,11);
+mylinkedList.insert(4,17);
+mylinkedList.append(19);
+mylinkedList.delete(19);
+mylinkedList.delete(13);
+mylinkedList.delete(11);
+mylinkedList.prepend(23);
+console.log(mylinkedList.traverse(),mylinkedList.length);
+mylinkedList.reverse();
 console.log(mylinkedList.traverse(),mylinkedList.length);
 console.log(mylinkedList);

@@ -41,7 +41,6 @@ constructor(){
   }
 
   pop(){
-    if (this.length===0){console.log('stack is empty'); return;}
     let data = this.top.value;
      this.top=this.top.next;
      this.length=this.length-1;
@@ -66,10 +65,8 @@ constructor(){
 
 let stack = new Stack();
 stack.peek();
-
-stack.push(10);
 //console.log(stack);
-console.log(stack.pop());
+stack.push(10);
 stack.peek();
 //console.log(stack);
 stack.push(20);
