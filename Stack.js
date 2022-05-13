@@ -41,6 +41,7 @@ constructor(){
   }
 
   pop(){
+    if (this.length===0){console.log('stack is empty'); return;}
     let data = this.top.value;
      this.top=this.top.next;
      this.length=this.length-1;
@@ -49,32 +50,35 @@ constructor(){
   }
 
   peek(){
-    console.log(this._traverse());
+    if (this.length===0){console.log('stack is empty');return;}
+    console.log(this.top.value);
   }
 
-  _traverse(){
+  traverse(){
     let currentNode = this.top;
     let result = [];
     while(currentNode!==null){
       result.push(currentNode.value);
       currentNode=currentNode.next;
     }
-    return result;
+    console.log( result);
   }
 }
 
 let stack = new Stack();
 stack.peek();
-//console.log(stack);
+stack.traverse();
 stack.push(10);
-stack.peek();
-//console.log(stack);
-stack.push(20);
-stack.peek();
 //console.log(stack);
 console.log(stack.pop());
-stack.peek();
+stack.peek();stack.traverse();
+//console.log(stack);
+stack.push(20);stack.push(60);stack.push('a');
+stack.peek();stack.traverse();
 //console.log(stack);
 console.log(stack.pop());
-stack.peek();
+stack.peek();stack.traverse();
+//console.log(stack);
+console.log(stack.pop());
+stack.peek();stack.traverse();
 //console.log(stack);
