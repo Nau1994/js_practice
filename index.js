@@ -167,6 +167,6 @@ heap= new Heap();
 //console.log(heap.lookup(40));
 //console.log(heap.lookup(50));
 //console.log(heap.lookup(36));
-console.log(JSON.stringify(heap));
+console.log((heap));
 console.log(heap.sort());
-console.log(JSON.stringify(heap));
+console.log(heap);
