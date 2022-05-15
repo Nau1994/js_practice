@@ -1,95 +1,175 @@
 //                    root(50)
-
+//                /              \
+//         left(40)             right(60)
+//          /    \             /        \
+//   left(35)    right(45)  left(55)    right(65)
 
 class Node{
-  constructor(character){
-    this.node={character:null};
+  constructor(value){
+    this.value=value;
+    
   }
 }
 
-class Trie{
+class Heap{
   constructor(){
-    this.dictionary={};
+    this.length=0;
+    this.queue=[]
     }
 
-  insert(string){
-    
-    let dict=this.dictionary;
-    for(let char of string.split('')){
-      dict=this._add(char,dict);
-      
-    }
-    dict['End']={};
+  insert(value){
+    this.queue.push(new Node(value));
+    this.length++;
+    this._FixHeap();
     return this;
   }
 
-  search(string){
-    if (string===null){string='';}
-    this.insert(string);
-    let dict=this.dictionary;
-    let recommended=[];
-    let seachkey=string;
-    for(let char of string.split('')){
-      dict=this._lastDict(char,dict);
-    }
+  remove(){
 
-    [dict,recommended]=this._findRecommended(dict,recommended,seachkey);
+    if (this.length===1){this.length--;
+                         return this.queue.pop().value; }
+    let removed=this.queue[0].value;
+    this.queue[0]=this.queue.pop();
+    this.length--;
+    this._MaxHeapify();
+    return removed;
     
-    return recommended;
   }
 
-  _findRecommended(dict,recommended,seachkey){
+  sort(){
+    let sorted =[];
     
-    for (let char in dict){
-      //console.log(char);
-      if (char==='End'){
-        recommended.push(seachkey);
-      }
-      else{
-        //seachkey=seachkey+char;
-        dict=dict[char];
-        [dict,recommended]=this._findRecommended(dict,recommended,seachkey+char);
-      }
-    }
-
-    return [dict,recommended];
-  }
-  
-  _lastDict(char,dict){
-    
-    while(dict[char]){
-      dict=dict[char];
-      return dict;
-      }
-    
-  }
-  
-  _add(char,dict){
-    
-    while(dict[char] ){
+    let len=this.length;
+    for (let i=0;i<len;i++){
       
-      dict=dict[char];
-      return dict;
-      }
-    dict[char]={};
-    dict=dict[char];
-    return dict;
+      sorted.push(this.remove());
+    
+    }
+    for (let item of sorted){
+      
+      this.insert(item);
+    
+    }
+    return sorted;
   }
+  
+
+  _MaxHeapify(){
+    let max=0;
+    let first =2*max+1;
+    let second =2*max+2;
+    while(1){
+      
+      let temp_max=0;
+      
+      
+      if(max<=this.length-1 && first<=this.length-1 && second<=this.length-1){
+        
+        temp_max=this._threeCompare(max,first,second);
+      }
+      else if(max<=this.length-1 && first<=this.length-1){
+        
+        temp_max=this._twoCompare(max,first);
+        
+      }
+
+      
+      if (temp_max===max){
+          return;
+        }
+        else{
+          max=temp_max;
+        }
+      
+      first =2*max+1;
+      second =2*max+2;
+      
+      
+    }
+    
+  }
+
+  _twoCompare(max,first){
+    if(this.queue[max].value < this.queue[first].value){
+          [this.queue[max],this.queue[first]]=this._swap(this.queue[max],this.queue[first]);
+          return first;
+        }
+    return max;
+  }
+
+  _threeCompare(max,first,second){
+    
+
+    
+
+    let m= this.queue[max].value;
+    let f= this.queue[first].value;
+    let s= this.queue[second].value;
+    
+    if (s > f && s > m){
+      
+      [this.queue[max],this.queue[second]]=this._swap(this.queue[max],this.queue[second]);
+      
+      return second;
+      
+    }
+    else if( f> m && f > s){
+      
+      [this.queue[max],this.queue[first]]=this._swap(this.queue[max],this.queue[first]);
+      
+      return first;
+    }
+    else{
+      return max;
+    }
+    
+  }
+  
+  _swap(max,first){
+    
+          let temp =max;
+          max=first;
+          first=temp;
+    
+    return [max,first];
+  }
+  
+  _FixHeap(){
+    let child =this.length-1;
+    let parents= Math.floor((child-1)/2);
+    while(parents>=0)
+    if (this.queue[child].value>this.queue[parents].value){
+      [this.queue[child],this.queue[parents]]=this._swap(this.queue[child],this.queue[parents]);
+      child=parents;
+      parents= Math.floor((child-1)/2);
+    }
+    else{
+      return ;
+    }
+  }
+  
   
 }
   
-trie= new Trie();
-console.log(trie.search('naushad'));
-console.log(trie.search('naushad is'));
-//console.log(JSON.stringify(trie));
-console.log(trie.search('nau'));
-//console.log(JSON.stringify(trie));
-console.log(trie.search('samshad'));
-console.log(trie.search('sam'));
-console.log(trie.search('n'));
-console.log(trie.search('s'));
+heap= new Heap();
 
-//console.log(trie.node);
 
-//console.log(JSON.stringify(trie));
-//console.log(JSON.parse(trie));
+(heap.insert(50));
+(heap.insert(60));
+(heap.insert(40));
+(heap.insert(35));
+(heap.insert(33));
+(heap.insert(32));
+(heap.insert(34));
+(heap.insert(37));
+(heap.insert(36));
+(heap.insert(39));
+(heap.insert(45));
+(heap.insert(55));
+(heap.insert(41));
+//console.log(heap.lookup(40));
+//console.log(heap.lookup(50));
+//console.log(heap.lookup(36));
+console.log((heap));
+console.log(heap.remove());
+console.log(heap);

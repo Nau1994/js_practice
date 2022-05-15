@@ -58,18 +58,19 @@ class Heap{
     let max=0;
     let first =2*max+1;
     let second =2*max+2;
-    while(max<this.length-1 && first<this.length-1 && second<this.length-1){
+    while(1){
       
       let temp_max=0;
       
-      if(first===this.length-1){
+      
+      if(max<=this.length-1 && first<=this.length-1 && second<=this.length-1){
+        
+        temp_max=this._threeCompare(max,first,second);
+      }
+      else if(max<=this.length-1 && first<=this.length-1){
         
         temp_max=this._twoCompare(max,first);
         
-      }
-      else{
-        
-        temp_max=this._threeCompare(max,first,second);
       }
 
       
@@ -85,6 +86,7 @@ class Heap{
       
       
     }
+    
   }
 
   _twoCompare(max,first){
@@ -151,6 +153,7 @@ class Heap{
   
 heap= new Heap();
 
+
 (heap.insert(50));
 (heap.insert(60));
 (heap.insert(40));
@@ -168,5 +171,5 @@ heap= new Heap();
 //console.log(heap.lookup(50));
 //console.log(heap.lookup(36));
 console.log((heap));
-console.log(heap.sort());
+console.log(heap.remove());
 console.log(heap);
