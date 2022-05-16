@@ -1,3 +1,4 @@
+//take less space(log(N)) but in worst case more time N^2
 let numbers=new Array(10000000).fill().map(() => Math.floor(Math.random()*10000));
 
 function quickSort(array, left, right){
