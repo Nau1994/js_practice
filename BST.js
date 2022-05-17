@@ -47,7 +47,7 @@ class BST{
     return this;
   }
 
-  lookup(value){
+  binarySearch(value){
     let currentNode=this.root;
     while(1){
       if (value === currentNode.value){
@@ -166,9 +166,9 @@ bst= new BST();
 (bst.insert(45));
 (bst.insert(55));
 (bst.insert(65));
-//console.log(bst.lookup(40));
-//console.log(bst.lookup(50));
-//console.log(bst.lookup(36));
+//console.log(bst.binarySearch(40));
+//console.log(bst.binarySearch(50));
+//console.log(bst.binarySearch(36));
 console.log(JSON.stringify(bst));
 console.log(bst.remove(40));
 console.log(JSON.stringify(bst));
