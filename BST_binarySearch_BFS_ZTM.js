@@ -1,4 +1,3 @@
-// how search happened in database?
 
 //what is use of DFS and BFS ?
 //both O(N) used to searching(traversing) for graph(unordered tree)
