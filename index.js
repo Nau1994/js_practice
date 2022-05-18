@@ -2,11 +2,11 @@
 
 //what is use of DFS and BFS ?
 //both O(N) used to searching(traversing) for graph(unordered tree)
-//BFS(preferable if have higher level info)
+//BFS(preferable if have higher level info)(using queue)
 //PROS:-Used in shortest path tree,can be used to identifed the level of node,or if u have additional info like level node then closest node can be find at the level
 //Cons:-queue take more memory
 
-//DFS(preferable if have lower level info)
+//DFS(preferable if have lower level info)(recursive)
 //PROS:-stack take less memory,Does Path(S->D) exits
 //Cons:-can get slow 
 
