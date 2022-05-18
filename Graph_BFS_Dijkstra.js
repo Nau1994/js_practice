@@ -101,7 +101,7 @@ class Graph {
     let currentNode = source;
     let list = [];
     let path={};
-    path[currentNode]=currentNode;
+    path[currentNode]=[currentNode,0];
     let queue = [];
     queue.push(currentNode);
 
@@ -120,7 +120,43 @@ class Graph {
       for (const item in this.adjacentList[currentNode]) {
           if(!list.includes(item)) {
           queue.push(item);
-            path[item]=path[currentNode]+item;
+            let p=path[currentNode][0]+item;
+            let l=path[currentNode][1]+1;
+            path[item]=[p,l];
+          }
+          }
+      
+    }
+    return path;
+  }
+
+  Dijkstra(source){
+    let currentNode = source;
+    let list = [];
+    let path={};
+    path[currentNode]=[currentNode,0];
+    let queue = [];
+    queue.push(currentNode);
+
+    while(queue.length > 0){
+      
+      currentNode = queue.shift();
+      
+      
+      if(!list.includes(currentNode)) {
+        
+          list.push(currentNode);
+        
+          }
+     
+      
+      for (const item in this.adjacentList[currentNode]) {
+        if (!path[item] || this.adjacentList[currentNode][item]+path[currentNode][1]<path[item][1])
+          {
+          queue.push(item);
+            let p=path[currentNode][0]+item;
+            let l=path[currentNode][1]+this.adjacentList[currentNode][item];
+            path[item]=[p,l];
           }
           }
       
@@ -132,14 +168,20 @@ class Graph {
 }
 
 const graph = new Graph();
-(graph.addEdge('A', 'B', false));
-(graph.addEdge('B', 'C', false));
-(graph.addEdge('C', 'E', false));
-(graph.addEdge('B', 'D', false));
-(graph.addEdge('D', 'E', false));
-(graph.addEdge('A', 'E', false));
-(graph.addEdge('E', 'D', false));
-(graph.addEdge('D', 'F', false));
-console.log(graph.bfsPath('A'));
-console.log(graph.BreadthFirstSearch('A'));
+(graph.addEdge('A', 'B', false,2));
+(graph.addEdge('B', 'C', false,1));
+(graph.addEdge('C', 'E', false,2));
+(graph.addEdge('B', 'D', false,3));
+(graph.addEdge('D', 'E', false,4));
+(graph.addEdge('A', 'E', false,2));
+(graph.addEdge('E', 'D', false,1));
+(graph.addEdge('D', 'F', false,2));
 console.log(graph);
+//traversal
+console.log('traversal--------->',graph.BreadthFirstSearch('A'));
+//path and level
+console.log('path and level--------->',graph.bfsPath('A'));
+//path and shortest path
+console.log('shortest path--------->',graph.Dijkstra('A'));
+
+

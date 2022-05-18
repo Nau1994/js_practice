@@ -223,6 +223,7 @@ class BST{
 }
 
 
+
 function traversePreOrder(node, list){
   list.push(node.value);
   if(node.left) {
@@ -255,6 +256,8 @@ function traversePostOrder(node, list){
   list.push(node.value);
   return list;
 }
+
+
 
 bst= new BST();
 
