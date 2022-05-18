@@ -132,6 +132,16 @@ class BST{
     return list;
   }
 
+    DFSPreOrder(currentNode, list) {
+    return traversePreOrder(this.root, []);
+  }
+  DFSPostOrder(){
+    return traversePostOrder(this.root, []); 
+  }
+  DFSInOrder(){
+    return traverseInOrder(this.root, []);
+  } 
+
 
   remove(value){
     let currentNode=this.root;
@@ -209,10 +219,43 @@ class BST{
   }
     
   }
-
-  
-  
+ 
 }
+
+
+function traversePreOrder(node, list){
+  list.push(node.value);
+  if(node.left) {
+    traversePreOrder(node.left, list);
+  }
+  if(node.right) {
+    traversePreOrder(node.right, list);
+  }
+  return list;
+}
+
+function traverseInOrder(node, list){
+  if(node.left) {
+    traverseInOrder(node.left, list);
+  }
+  list.push(node.value);
+  if(node.right) {
+    traverseInOrder(node.right, list);
+  }
+  return list;
+}
+
+function traversePostOrder(node, list){
+  if(node.left) {
+    traversePostOrder(node.left, list);
+  }
+  if(node.right) {
+    traversePostOrder(node.right, list);
+  }
+  list.push(node.value);
+  return list;
+}
+
 bst= new BST();
 
 (bst.insert(50));
@@ -235,3 +278,6 @@ console.log(bst.lookup(53));
 console.log(bst.remove(40));
 console.log(bst.BreadthFirstSearch());
 //console.log(JSON.stringify(bst));
+console.log('DFSpre', bst.DFSPreOrder());
+console.log('DFSin', bst.DFSInOrder());
+console.log('DFSpost', bst.DFSPostOrder());
