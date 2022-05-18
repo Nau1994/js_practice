@@ -182,6 +182,6 @@ console.log('traversal--------->',graph.BreadthFirstSearch('A'));
 //path and level
 console.log('path and level--------->',graph.bfsPath('A'));
 //path and shortest path
-console.log('shortest path--------->',graph.Dijkstra('A'));
+console.log('Dijkstra (not negative)shortest path--------->',graph.Dijkstra('A'));
 
 
